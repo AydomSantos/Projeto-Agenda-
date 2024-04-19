@@ -1,0 +1,59 @@
+<%- include('includes/head') %> <!-- Inclui o cabeçalho da página -->
+
+<%- include('includes/nav') %> <!-- Inclui a barra de navegação -->
+
+<div class="container"> <!-- Início do contêiner Bootstrap -->
+  <div class="row"> <!-- Início da linha -->
+
+    <!-- Coluna vazia para margem esquerda -->
+    <div class="col-lg-2"></div>
+
+    <!-- Coluna principal -->
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Contato</h1> <!-- Título centralizado -->
+      <p class="text-center lead">Crie ou edite seu contato abaixo.</p> <!-- Parágrafo centralizado -->
+
+      <!-- Inclui mensagens de erro ou sucesso -->
+      <%- include('includes/messages') %>
+
+      <!-- Verifica se é uma edição ou criação de contato -->
+      <% if(contato._id) { %>
+      <form action="/contato/edit/<%= contato._id %>" method="POST"> <!-- Formulário de edição -->
+      <% } else { %>
+      <form action="/contato/register" method="POST"> <!-- Formulário de registro -->
+      <% } %>
+
+        <!-- Campo oculto para token CSRF -->
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+
+        <!-- Campos de entrada para nome, sobrenome, email e telefone -->
+        <div class="form-group">
+          <label>Nome</label>
+          <input value="<%= contato.nome %>" type="text" class="form-control" name="nome">
+        </div>
+        <div class="form-group">
+          <label>Sobrenome</label>
+          <input value="<%= contato.sobrenome %>" type="text" class="form-control" name="sobrenome">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input value="<%= contato.email %>" type="email" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+          <label>Telefone</label>
+          <input value="<%= contato.telefone %>" type="tel" class="form-control" name="telefone">
+        </div>
+
+        <!-- Botão para enviar o formulário -->
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </form> <!-- Fim do formulário -->
+
+    </div> <!-- Fim da coluna principal -->
+
+    <!-- Coluna vazia para margem direita -->
+    <div class="col-lg-2"></div>
+
+  </div> <!-- Fim da linha -->
+</div> <!-- Fim do contêiner Bootstrap -->
+
+<%- include('includes/footer') %> <!-- Inclui o rodapé da página -->

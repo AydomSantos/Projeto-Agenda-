@@ -1,0 +1,46 @@
+<%- include('includes/head') %> <!-- Inclui o cabeçalho da página -->
+
+<%- include('includes/nav') %> <!-- Inclui a barra de navegação -->
+
+<div class="container"> <!-- Início do contêiner Bootstrap -->
+  <div class="row"> <!-- Início da linha -->
+
+    <!-- Coluna vazia para margem esquerda -->
+    <div class="col-lg-2"></div>
+
+    <!-- Coluna principal -->
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Agenda</h1> <!-- Título centralizado -->
+      <p class="text-center lead">Seus contatos estão abaixo</p> <!-- Parágrafo centralizado -->
+
+      <!-- Inclui mensagens de erro ou sucesso -->
+      <%- include('includes/messages') %>
+
+      <% if(contatos.length > 0) { %> <!-- Verifica se existem contatos -->
+      <div class="responsive-table"> <!-- Início da tabela responsiva -->
+        <table class="table my-3"> <!-- Tabela Bootstrap -->
+          <% contatos.forEach(contato => { %> <!-- Loop pelos contatos -->
+          <tr> <!-- Linha da tabela -->
+            <td><%= contato.nome %></td> <!-- Coluna de nome do contato -->
+            <td><%= contato.sobrenome %></td> <!-- Coluna de sobrenome do contato -->
+            <td><%= contato.telefone %></td> <!-- Coluna de telefone do contato -->
+            <td><%= contato.email %></td> <!-- Coluna de email do contato -->
+            <td><a href="/contato/index/<%= contato._id %>">Editar</a></td> <!-- Link para editar o contato -->
+            <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Excluir</a></td> <!-- Link para excluir o contato -->
+          </tr> <!-- Fim da linha da tabela -->
+          <% }); %> <!-- Fim do loop -->
+        </table> <!-- Fim da tabela -->
+      </div> <!-- Fim da tabela responsiva -->
+      <% } else { %> <!-- Se não houver contatos -->
+        <p class="text-center lead">Não existem contatos na sua agenda.</p> <!-- Mensagem de que não há contatos -->
+      <% } %> <!-- Fim do bloco condicional -->
+
+    </div> <!-- Fim da coluna principal -->
+    
+    <!-- Coluna vazia para margem direita -->
+    <div class="col-lg-2"></div>
+
+  </div> <!-- Fim da linha -->
+</div> <!-- Fim do contêiner Bootstrap -->
+
+<%- include('includes/footer') %> <!-- Inclui o rodapé da página -->
